@@ -9,14 +9,19 @@ const Books = require('./models/BookModel.js');
 async function seed()
 {
         await Books.create({
-            title: 'noName',
-            description: 'test book',
-            status: "checkedout"
+            title: 'BookOfEli',
+            description: 'Fastest gun slinger from the future',
+            status: "Available"
     });
         await Books.create({
-            title: 'noName2',
-            description: 'test2 book',
-            status: "checkedout2"
+            title: 'Tombstone',
+            description: 'fastest gun slingers in the west from the past',
+            status: "Not-Available"
+    });
+        await Books.create({
+            title: 'Back To the Future 2',
+            description: 'Not a fast gun slinger',
+            status: "Available"
     });
 
     mongoose.disconnect();
