@@ -43,11 +43,10 @@ async function addBook(request, response, next)
   try {
     //  get info from body of request object
     console.log('request.body: ',request.body);
-    const newBook = request.body;
+
     //  create a record and save
-    const book = await Book.create(request.body);
-    console.log('book: ', book);
-    book.save();
+    const createdBook = await Book.create(request.body);
+    response.status(200).send(createdBook);
   }
   catch (error)
   {
