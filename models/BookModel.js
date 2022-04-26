@@ -18,4 +18,3 @@ const bookSchema = new Schema({//properties of something is instantiated below
 //this will give functionality 
 const Book = mongoose.model('Books', bookSchema);
 module.exports = Book;
-

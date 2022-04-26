@@ -20,14 +20,6 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3002;
 
-
-
-app.get('/books', getBooks);
-
-app.get('/', (request, response) => {
-    response.send('test requested');
-});
-
 async function getBooks(request, response, next)
 {
     try{
@@ -43,6 +35,35 @@ async function getBooks(request, response, next)
         next(error);
     }
 }
+
+async function addBook(request, response, next)
+{
+  try {
+    //  get info from body of request object
+    const newBook = request.body.newBook;
+
+    //  create a record and save
+    const book = new Book(
+      request.body.newBook.title, 
+      request.body.newBook.description,
+      request.body.newBook.status
+      );
+    book.save();
+  }
+  catch (error)
+  {
+    console.log('An error occurred in addBook callback: ', error.message);
+    next(error);
+  }
+}
+
+app.post('/add', addBook);
+
+app.get('/books', getBooks);
+
+app.get('/', (request, response) => {
+    response.send('test requested');
+});
 app.get('*', (request, reponse) => response.status(404).send('not correct webpage. try again'))
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
