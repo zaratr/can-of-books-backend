@@ -55,6 +55,25 @@ async function addBook(request, response, next)
   }
 }
 
+async function deleteBook(request, response, next) {
+  // capture the id in the url
+  let id = request.params.id;
+  // console.log('id: ',id);
+  
+  try {
+    // attempt delete using mongoose
+    await Book.findByIdAndDelete(id);
+    response.status(200).send('Book deleted.')
+  }
+  catch (error) {
+    console.log('An error occurred in deleteBook callback: ', error.message);
+    next(error);
+  }
+}
+
+// serverurl/book/<book_id>
+app.delete('/book/:id', deleteBook)
+
 app.post('/add', addBook);
 
 app.get('/books', getBooks);
