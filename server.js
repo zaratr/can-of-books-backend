@@ -43,6 +43,6 @@ async function getBooks(request, response, next)
         next(error);
     }
 }
-app.get('*', (respond, requres) => response.status(404).send('not correct webpage. try again'))
+app.get('*', (request, reponse) => response.status(404).send('not correct webpage. try again'))
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
