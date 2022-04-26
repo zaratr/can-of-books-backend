@@ -1,5 +1,6 @@
 'use strict'
 
+//  TODO: collapse 4 and 6 into one-line {schema} = require(mongoose)
 const mongoose = require('mongoose')
 //extracting the schema property from the mongoose object
 const {Schema} = mongoose;
@@ -18,4 +19,3 @@ const bookSchema = new Schema({//properties of something is instantiated below
 //this will give functionality 
 const Book = mongoose.model('Books', bookSchema);
 module.exports = Book;
-

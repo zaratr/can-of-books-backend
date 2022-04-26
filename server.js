@@ -14,19 +14,13 @@ db.on('error', console.error.bind(console, 'cennection error:'));
 db.once('open', function(){
     console.log('Mongoose is connected');
 });
+
 //middleware
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 3002;
-
-
-
-app.get('/books', getBooks);
-
-app.get('/', (request, response) => {
-    response.send('test requested');
-});
 
 async function getBooks(request, response, next)
 {
@@ -43,6 +37,31 @@ async function getBooks(request, response, next)
         next(error);
     }
 }
-app.get('*', (respond, requres) => response.status(404).send('not correct webpage. try again'))
+
+async function addBook(request, response, next)
+{
+  try {
+    //  get info from body of request object
+    console.log('request.body: ',request.body);
+
+    //  create a record and save
+    const createdBook = await Book.create(request.body);
+    response.status(200).send(createdBook);
+  }
+  catch (error)
+  {
+    console.log('An error occurred in addBook callback: ', error.message);
+    next(error);
+  }
+}
+
+app.post('/add', addBook);
+
+app.get('/books', getBooks);
+
+app.get('/', (request, response) => {
+    response.send('test requested');
+});
+app.get('*', (request, reponse) => response.status(404).send('not correct webpage. try again'))
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
