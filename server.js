@@ -56,9 +56,12 @@ async function addBook(request, response, next)
 }
 
 async function deleteBook(request, response, next) {
+  // capture the id in the url
   let id = request.params.id;
-  console.log('id: ',id);
+  // console.log('id: ',id);
+  
   try {
+    // attempt delete using mongoose
     await Book.findByIdAndDelete(id);
     response.status(200).send('Book deleted.')
   }
@@ -68,6 +71,7 @@ async function deleteBook(request, response, next) {
   }
 }
 
+// serverurl/book/<book_id>
 app.delete('/book/:id', deleteBook)
 
 app.post('/add', addBook);
