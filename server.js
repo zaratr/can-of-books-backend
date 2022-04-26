@@ -14,9 +14,11 @@ db.on('error', console.error.bind(console, 'cennection error:'));
 db.once('open', function(){
     console.log('Mongoose is connected');
 });
+
 //middleware
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 3002;
 
@@ -40,14 +42,11 @@ async function addBook(request, response, next)
 {
   try {
     //  get info from body of request object
-    const newBook = request.body.newBook;
-
+    console.log('request.body: ',request.body);
+    const newBook = request.body;
     //  create a record and save
-    const book = new Book(
-      request.body.newBook.title, 
-      request.body.newBook.description,
-      request.body.newBook.status
-      );
+    const book = await Book.create(request.body);
+    console.log('book: ', book);
     book.save();
   }
   catch (error)

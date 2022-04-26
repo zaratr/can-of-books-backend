@@ -1,5 +1,6 @@
 'use strict'
 
+//  TODO: collapse 4 and 6 into one-line {schema} = require(mongoose)
 const mongoose = require('mongoose')
 //extracting the schema property from the mongoose object
 const {Schema} = mongoose;
