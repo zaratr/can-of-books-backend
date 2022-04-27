@@ -75,11 +75,12 @@ async function deleteBook(request, response, next) {
 async function putBook(request, response, next)
 {
   try{
-    let id = req.params.id;
+    let id = request.params.id;
     let updatedBook = await Book.findByIdAndUpdate(id, request.body, { new: true, overwrite: true});
-    res.status(200).send(updateBook);
+    response.status(200).send(updatedBook);
+    console.log("HERE");
   }
-  catch(e){
+  catch(error){
     next(error);
   }
 }
