@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Book = require('./models/BookModel.js');
+const res = require('express/lib/response');
 //schema
 
 mongoose.connect(process.env.DB_URL);
@@ -38,7 +39,7 @@ async function getBooks(request, response, next)
     }
 }
 
-async function addBook(request, response, next)
+async function postBooks(request, response, next)
 {
   try {
     //  get info from body of request object
@@ -71,12 +72,27 @@ async function deleteBook(request, response, next) {
   }
 }
 
-// serverurl/book/<book_id>
-app.delete('/book/:id', deleteBook)
+async function putBook(request, response, next)
+{
+  try{
+    let id = request.params.id;
+    let updatedBook = await Book.findByIdAndUpdate(id, request.body, { new: true, overwrite: true});
+    response.status(200).send(updatedBook);
+  }
+  catch(error){
+    next(error);
+  }
+}
 
-app.post('/add', addBook);
+// serverurl/book/<book_id>
+
+app.post('/books', postBooks);
 
 app.get('/books', getBooks);
+
+app.delete('/book/:id', deleteBook);
+
+app.put('/book/:id', putBook);
 
 app.get('/', (request, response) => {
     response.send('test requested');
