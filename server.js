@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 3002;
 
 async function getBooks(request, response, next)
 {
-  authUser(request, async (err, user) =>{
+  authUser(request, async (error, user) =>{
     if(error) {
       console.error(error);
       response.send('token recieved is invalid, try again');
