@@ -53,6 +53,16 @@ Finish time: 1500
 
 Actual time needed to complete: 3
 
+### User Authentication
+
+Estimate of time needed to complete: 3 hours
+
+Start time: 1200
+
+Finish time: 1500
+
+Actual time needed to complete: 3
+
 Lead BE Developer: Raul [Zarate](https://github.com/zaratr)  
 
 ## Credit and Collaborations
