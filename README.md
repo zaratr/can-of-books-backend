@@ -67,5 +67,5 @@ Lead BE Developer: Raul [Zarate](https://github.com/zaratr)
 
 ## Credit and Collaborations
 
-Paul Zarate [github](https://github.com/zaratr)  
+Raul Zarate [github](https://github.com/zaratr)  
 Jon Rumsey [github](https://github.com/nojronatron)  
