@@ -6,9 +6,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Book = require('./models/BookModel.js');
 const res = require('express/lib/response');
+
+
 //schema
 
 mongoose.connect(process.env.DB_URL);
+//AUTHENTICATION
+const authUser = require('./auth');
+
 //add validation to confirm we are wired to mongodb
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'cennection error:'));
@@ -25,6 +30,13 @@ const PORT = process.env.PORT || 3002;
 
 async function getBooks(request, response, next)
 {
+  authUser(request, async (err, user) =>{
+    if(error) {
+      console.error(error);
+      response.send('token recieved is invalid, try again');
+    }
+    else{
+
     try{
         let queryObj = {};
         if(request.query.result){
@@ -37,6 +49,7 @@ async function getBooks(request, response, next)
     {
         next(error);
     }
+    }});
 }
 
 async function postBooks(request, response, next)
